@@ -1,4 +1,11 @@
 import axios from "axios"
+import dotenv from "dotenv"
+dotenv.config()
+
+const sanitizeGeminiResponse = (text) => {
+  // Remove triple backticks and "json" keyword
+  return text.replace(/```json|```/g, "").trim();
+};
 
 const geminiResponse = async (command, assistantName, userName) => {
   try {
@@ -54,10 +61,11 @@ Now your userInput - ${command}
       }]
     });
 
-    const text = result.data.candidates[0].content.parts[0].text;
+    const raw = result.data.candidates[0].content.parts[0].text;
 
-    // ✨ Critical: Convert Gemini's string to a JSON object
-    const parsed = JSON.parse(text);
+    const cleanText = sanitizeGeminiResponse(raw);
+    const parsed = JSON.parse(cleanText);
+
     return parsed;
 
   } catch (error) {
