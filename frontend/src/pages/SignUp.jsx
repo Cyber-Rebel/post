@@ -1,4 +1,4 @@
-// import React from 'react'
+
 import React, { useContext, useState } from 'react'
 import bg from "../assets/authBg.png"
 import { FaEye } from "react-icons/fa";

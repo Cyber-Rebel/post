@@ -12,7 +12,7 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-  origin: "https://virtualassistant-atct.onrender.com",
+  origin: "http://localhost:5174/",
   credentials: true
 }));
 app.use("/api/auth",authRouter)
